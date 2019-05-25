@@ -33,11 +33,16 @@ class HomeScreen extends Component {
     );
   }
 
+  keyExtractor(item) {
+    return `item-${item.id}`;
+  }
+
   render() {
     return (
       <FlatList
         data={this.props.users}
         renderItem={this.renderItem.bind(this)}
+        keyExtractor={this.keyExtractor.bind(this)}
       />
     )
   }
