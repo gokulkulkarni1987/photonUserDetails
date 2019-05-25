@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, TouchableWithoutFeedback } from 'react-native';
 import { connect } from "react-redux";
 import { Card } from 'react-native-elements';
 import {
@@ -9,9 +9,9 @@ import {
 class HomeScreen extends Component {
 
   itemClicked(item) {
-    // this.props.navigation.navigate({
-
-    // })
+    this.props.navigation.navigate('Details', {
+      item
+    })
   }
 
   componentDidMount() {
@@ -20,13 +20,16 @@ class HomeScreen extends Component {
 
   renderItem({ item }) {
     return (
-      <Card
-        title={item.title}
-        image={{
-          uri: item.thumbnailUrl
-        }}
+      <TouchableWithoutFeedback
         onPress={() => this.itemClicked(item)}
-      />
+      >
+        <Card
+          title={item.title}
+          image={{
+            uri: item.thumbnailUrl
+          }}
+        />
+      </TouchableWithoutFeedback>
     );
   }
 
@@ -34,7 +37,7 @@ class HomeScreen extends Component {
     return (
       <FlatList
         data={this.props.users}
-        renderItem={this.renderItem}
+        renderItem={this.renderItem.bind(this)}
       />
     )
   }
