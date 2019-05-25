@@ -7,7 +7,7 @@ class DetailsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: "",
+      image: null,
       isVisible: false
     };
   }
@@ -68,10 +68,10 @@ class DetailsScreen extends Component {
             }}
           />
 
-          <Image
+          {this.state.image && <Image
             style={{ width: 200, height: 200, alignSelf: 'center' }}
             source={{ uri: this.state.image }}
-          />
+          />}
         </View>
         {this.state.isVisible && (
           <Overlay
